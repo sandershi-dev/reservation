@@ -3,16 +3,21 @@ package com.example.reservation.domain;
 import java.sql.Date;
 import java.sql.Time;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
+@Table(name = "reservation")
 public class Reservation {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "reservationID",nullable=false)
     private Integer reservationId;
 
     private Guest guest;
