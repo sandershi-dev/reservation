@@ -1,9 +1,9 @@
-package com.example.reservation.repository;
+// package com.example.reservation.repository;
 
-import org.springframework.data.repository.CrudRepository;
+// import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.reservation.domain.Reservation;
+// import com.example.reservation.domain.Reservation;
 
-public interface ReservationRepository  extends CrudRepository<Reservation, Integer> {
+// public interface ReservationRepository  extends JpaRepository<Reservation, Integer>{
     
-}
+// }

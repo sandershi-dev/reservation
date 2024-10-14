@@ -1,15 +1,19 @@
 package com.example.reservation.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+// @Entity
 public class Guest {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer guestId;
+    // @Id
+    // @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private String guestId;
 
     private String firstName;
 
@@ -19,45 +23,11 @@ public class Guest {
     
     private String mobileNumber;
 
+    private String username;
 
-    public Integer getGuestId() {
-        return this.guestId;
-    }
+    private String password;
 
-    public void setGuestId(Integer guestId) {
-        this.guestId = guestId;
-    }
+    private String role;
 
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return this.Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
-    public String getMobileNumber() {
-        return this.mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
 
 }
