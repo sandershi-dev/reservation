@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.ResponseEntity;
 
 import com.example.reservation.domain.Reservation;
-import com.example.reservation.service.ReservationServiceImpl;
+import com.example.reservation.service.impl.ReservationServiceImpl;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class UserController {
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/reservation/create")
-    public void createReservation(@RequestBody Reservation reservation){
+    public void createReservation(@RequestBody @Valid Reservation reservation){
         reservationService.addReservation(reservation);
     }
     

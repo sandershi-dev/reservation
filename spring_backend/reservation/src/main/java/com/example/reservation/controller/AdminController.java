@@ -1,21 +1,23 @@
 package com.example.reservation.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.reservation.domain.Reservation;
-import com.example.reservation.service.ReservationServiceImpl;
+import com.example.reservation.service.impl.ReservationServiceImpl;
 
 
 @RestController
 public class AdminController {
-    //@Autowired
-   // private ReservationRepository reservationRepository;
+
 
     @Autowired
     private ReservationServiceImpl reservationService;
@@ -25,10 +27,10 @@ public class AdminController {
         reservationService.addReservation(reservation);
     }
     
-    // @PutMapping("/admin/reservation/update")
-    // public void updateReservation(Reservation){
-    //     reservationService.updateReservation(reservation);
-    // }
+    @PutMapping("/admin/reservation/update")
+    public void updateReservation(String id,Reservation reservation){
+        reservationService.updateReservation(id,reservation);
+    }
 
     @DeleteMapping("/admin/reservation/delete")
     public void deleteReservation(String id){
@@ -36,8 +38,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/reservations/all")
-    public List<Reservation> getAllReservations(){
-        return reservationService.getAllReservations();
+    public ResponseEntity<Set<Reservation>> getAllReservations(){
+        return new ResponseEntity<>(reservationService.getAllReservations(), HttpStatus.OK);
     }
     
 }

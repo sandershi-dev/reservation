@@ -1,12 +1,13 @@
-package com.example.reservation.service.impl;
-import java.util.List;
+package com.example.reservation.service;
+import java.util.Set;
+
 import com.example.reservation.domain.Reservation;
 
 public interface  ReservationService {
     
     public void addReservation(Reservation reservation);
 
-    public List<Reservation> getAllReservations();
+    public Set<Reservation> getAllReservations();
 
     public Reservation getReservation(String Id);
 
