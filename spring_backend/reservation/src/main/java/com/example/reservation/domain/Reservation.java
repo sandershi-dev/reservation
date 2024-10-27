@@ -4,7 +4,16 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+import com.example.reservation.service.impl.resource.ReservationRequest;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,16 +23,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-// @Entity
-// @Table(name = "reservation")
+@Entity
+@Table(name = "reservation")
 public class Reservation {
     
-    // @Id
-    // @GeneratedValue(strategy=GenerationType.IDENTITY)
-    // @Column(name = "reservationID",nullable=false)
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id",nullable=false)
     private String id;
 
-    private String guest;
+    @NotBlank(message="Name cannot be blank")
+    private String guestName;
 
     @Min(value=1,message="cannot have less than 1 guest")
     private int numOfGuests;
@@ -33,6 +43,14 @@ public class Reservation {
     private Time time;
 
     private Timestamp timestamp;
+
+    public Reservation(ReservationRequest reservationRequest){
+        this.guestName= reservationRequest.getGuestName();
+        this.numOfGuests= reservationRequest.getNumOfGuests();
+        this.date= reservationRequest.getDate();
+        this.time= reservationRequest.getTime();
+        this.timestamp= new Timestamp(System.currentTimeMillis());
+    }
 
     
 }

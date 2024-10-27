@@ -1,51 +1,53 @@
 package com.example.reservation.service.impl;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.reservation.domain.Reservation;
+import com.example.reservation.repository.ReservationRepository;
 import com.example.reservation.service.ReservationService;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
 
-    //@Autowired
-   // private Connection connection;
+    @Autowired
+    ReservationRepository reservationRepository;
 
-    private final Map<String,Reservation> reservationMap = new HashMap<>();
 
     @Override
     public void addReservation(Reservation reservation){
-        int count = new Random().nextInt(0,99999999);
-        reservation.setId(String.valueOf(count));
-        reservationMap.put(reservation.getId(),reservation);
+        reservationRepository.save(reservation);
     
     }
 
     @Override
-    public Set<Reservation> getAllReservations(){
-        return new HashSet<>(reservationMap.values());
-    }
-
-    public Reservation updateReservation(String id, Reservation reservation){
-        if(reservationMap.containsKey(id)){
-            reservationMap.put(id,reservation);
-        }
-        return reservation;
-    }
-
-    @Override
     public Reservation getReservation(String id){
-
-        return reservationMap.getOrDefault(id, null);
+        return reservationRepository.findById(id).orElse(null);
     }
+
     @Override
     public void deleteReservation(String id){
-        reservationMap.remove(id);
+        reservationRepository.deleteById(id);
     }
+
+    @Override
+    public Reservation updateReservation(String id, Reservation reservation){
+        Optional<Reservation> originalReservation = reservationRepository.findById(id);
+        if(originalReservation.isPresent()){
+            reservationRepository.save(reservation);
+            return reservation;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Reservation> getAllReservations(){
+        return reservationRepository.findAll();
+    }
+
+    
+
 }

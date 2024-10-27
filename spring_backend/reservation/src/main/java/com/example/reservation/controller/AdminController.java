@@ -1,6 +1,6 @@
 package com.example.reservation.controller;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.reservation.domain.Reservation;
 import com.example.reservation.service.impl.ReservationServiceImpl;
+import com.example.reservation.service.impl.resource.ReservationRequest;
 
 
 @RestController
@@ -23,13 +26,14 @@ public class AdminController {
     private ReservationServiceImpl reservationService;
 
     @PostMapping("/admin/reservation/create")
-    public void createReservation(Reservation reservation){
+    public void createReservation(@RequestBody ReservationRequest reservationRequest){
+        Reservation reservation = new Reservation(reservationRequest);
         reservationService.addReservation(reservation);
     }
     
     @PutMapping("/admin/reservation/update")
-    public void updateReservation(String id,Reservation reservation){
-        reservationService.updateReservation(id,reservation);
+    public void updateReservation(@RequestParam String id,@RequestBody ReservationRequest reservationRequest){
+        reservationService.updateReservation(id,new Reservation(reservationRequest));
     }
 
     @DeleteMapping("/admin/reservation/delete")
@@ -38,7 +42,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/reservations/all")
-    public ResponseEntity<Set<Reservation>> getAllReservations(){
+    public ResponseEntity<List<Reservation>> getAllReservations(){
         return new ResponseEntity<>(reservationService.getAllReservations(), HttpStatus.OK);
     }
     

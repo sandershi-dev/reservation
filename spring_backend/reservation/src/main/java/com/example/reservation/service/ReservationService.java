@@ -1,5 +1,5 @@
 package com.example.reservation.service;
-import java.util.Set;
+import java.util.List;
 
 import com.example.reservation.domain.Reservation;
 
@@ -7,9 +7,11 @@ public interface  ReservationService {
     
     public void addReservation(Reservation reservation);
 
-    public Set<Reservation> getAllReservations();
+    public List<Reservation> getAllReservations();
 
-    public Reservation getReservation(String Id);
+    public Reservation getReservation(String id);
 
-    public void deleteReservation(String Id);
+    public void deleteReservation(String id);
+
+    public Reservation updateReservation(String id, Reservation reservation);
 }

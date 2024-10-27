@@ -1,9 +1,25 @@
-// package com.example.reservation.repository;
+package com.example.reservation.repository;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.List;
 
-// import com.example.reservation.domain.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// public interface ReservationRepository  extends JpaRepository<Reservation, Integer>{
+import com.example.reservation.domain.Reservation;
+
+
+
+
+@Repository
+public interface ReservationRepository  extends JpaRepository<Reservation, String>{
+
+    List<Reservation> findByDate(Date date);
+
+    List<Reservation> findByGuestName(String guestName);
+
+    List<Reservation> findByTime(Time time);
+
     
-// }
+}
