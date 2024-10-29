@@ -27,13 +27,12 @@ public class AdminController {
 
     @PostMapping("/admin/reservation/create")
     public void createReservation(@RequestBody ReservationRequest reservationRequest){
-        Reservation reservation = new Reservation(reservationRequest);
-        reservationService.addReservation(reservation);
+        reservationService.addReservation(reservationRequest.getReservation());
     }
     
     @PutMapping("/admin/reservation/update")
     public void updateReservation(@RequestParam String id,@RequestBody ReservationRequest reservationRequest){
-        reservationService.updateReservation(id,new Reservation(reservationRequest));
+        reservationService.updateReservation(id,reservationRequest.getReservation());
     }
 
     @DeleteMapping("/admin/reservation/delete")

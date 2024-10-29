@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-import com.example.reservation.service.impl.resource.ReservationRequest;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,12 +16,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "reservation")
 public class Reservation {
     
@@ -32,8 +34,12 @@ public class Reservation {
     @Column(name = "id",nullable=false)
     private String id;
 
-    @NotBlank(message="Name cannot be blank")
-    private String guestName;
+    @NotBlank(message="user cannot be blank")
+    private String user_id;
+
+    @ManyToOne
+    @JoinColumn(name="user",referencedColumnName="id")
+    private User user;
 
     @Min(value=1,message="cannot have less than 1 guest")
     private int numOfGuests;
@@ -44,13 +50,7 @@ public class Reservation {
 
     private Timestamp timestamp;
 
-    public Reservation(ReservationRequest reservationRequest){
-        this.guestName= reservationRequest.getGuestName();
-        this.numOfGuests= reservationRequest.getNumOfGuests();
-        this.date= reservationRequest.getDate();
-        this.time= reservationRequest.getTime();
-        this.timestamp= new Timestamp(System.currentTimeMillis());
-    }
+
 
     
 }
