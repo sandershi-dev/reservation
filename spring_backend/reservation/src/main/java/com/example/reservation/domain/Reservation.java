@@ -30,7 +30,7 @@ import jakarta.persistence.JoinColumn;
 public class Reservation {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.UUID)
     @Column(name = "id",nullable=false)
     private String id;
 

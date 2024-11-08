@@ -18,7 +18,7 @@ import lombok.Setter;
 public class ReservationRequest {   
 
     @NotBlank(message="Name cannot be blank")
-    private String username;
+    private String user_id;
     
     @Min(value=1,message="cannot have less than 1 guest")
     private int numOfGuests;
@@ -28,6 +28,11 @@ public class ReservationRequest {
     private Time time;
 
     public Reservation getReservation(){
-        return Reservation.builder().username(this.username).numOfGuests(this.numOfGuests).date(this.date).time(this.time).build();
+        return Reservation.builder()
+        .user_id(this.user_id)
+        .numOfGuests(this.numOfGuests)
+        .date(this.date)
+        .time(this.time)
+        .build();
     }
 }

@@ -19,7 +19,7 @@ import com.example.reservation.service.impl.resource.ReservationRequest;
 
 
 @RestController
-public class AdminController {
+public class AdminReservationController {
 
 
     @Autowired
