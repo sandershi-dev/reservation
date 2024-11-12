@@ -15,6 +15,13 @@ function ReservationForm() {
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
       console.log(formData)
+
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(formData)
+      // Here, we'll add the code to post the form data using Axios
       axios.post("http://localhost:8080/reservation/create",{ 
           user_id: "sander",
           numOfGuests: 10,
@@ -25,12 +32,6 @@ function ReservationForm() {
       }).catch(function(error){
         console.log(error);
       })
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(formData)
-      // Here, we'll add the code to post the form data using Axios
     };
 
   return (
