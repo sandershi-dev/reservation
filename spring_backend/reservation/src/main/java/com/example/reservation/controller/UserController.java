@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.reservation.domain.User;
 import com.example.reservation.service.impl.UserServiceImpl;
+import com.example.reservation.service.impl.resource.LoginRequest;
 import com.example.reservation.service.impl.resource.UserRequest;
 
 
@@ -52,6 +53,16 @@ public class UserController {
     @DeleteMapping("/user/delete")
     public void deleteUser(@RequestParam String id){
         userService.deleteUser(id);
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<String> userLogin(@RequestBody LoginRequest loginRequest) {
+        boolean isValidUser = userService.validateUser(loginRequest.getUsername(), loginRequest.getPassword());
+        if(isValidUser){
+            return new ResponseEntity<>("Login Success", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Incorrect Credentials",HttpStatus.I_AM_A_TEAPOT);
+        }
     }
     
     

@@ -21,6 +21,14 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(id).orElse(null);
     }
 
+    public boolean validateUser(String username, String password){
+        User user = userRepository.findByUsername(username);
+        if(user != null)
+            return user.getPassword().equals(password);
+        else
+            return false;
+        
+    }
     @Override
     public void createUser(User user){
         userRepository.save(user);
