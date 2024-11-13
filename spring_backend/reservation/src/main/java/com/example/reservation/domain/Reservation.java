@@ -1,24 +1,25 @@
 package com.example.reservation.domain;
 
-import java.sql.Date;
-import java.sql.Time;
+
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Builder;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
 
 @Getter
 @Setter
@@ -44,9 +45,9 @@ public class Reservation {
     @Min(value=1,message="cannot have less than 1 guest")
     private int numOfGuests;
 
-    private Date date;
+    private LocalTime time;
 
-    private Time time;
+    private LocalDate date;
 
     private Timestamp timestamp;
 

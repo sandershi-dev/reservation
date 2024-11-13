@@ -1,9 +1,9 @@
 package com.example.reservation.service.impl.resource;
-
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.example.reservation.domain.Reservation;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -17,15 +17,17 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ReservationRequest {   
 
+
     @NotBlank(message="Name cannot be blank")
     private String user_id;
     
     @Min(value=1,message="cannot have less than 1 guest")
     private int numOfGuests;
 
-    private Date date;
+    private LocalDate date;
 
-    private Time time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="HH:mm")
+    private LocalTime time;
 
     public Reservation getReservation(){
         return Reservation.builder()

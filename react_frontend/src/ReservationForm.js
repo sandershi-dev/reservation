@@ -23,10 +23,10 @@ function ReservationForm() {
       console.log(formData)
       // Here, we'll add the code to post the form data using Axios
       axios.post("http://localhost:8080/reservation/create",{ 
-          user_id: "sander",
-          numOfGuests: 10,
-          date: "2008-11-11",
-          time: "13:23:45"
+          user_id: formData.user_id,
+          numOfGuests: formData.numOfGuests,
+          date: formData.date,
+          time: formData.time
       }).then(function(response){
         console.log(response);
       }).catch(function(error){
@@ -41,7 +41,7 @@ function ReservationForm() {
           <div class="col-md-2"></div>
           <div class="form-group col-md-2">
             <label for="inputFirstName">user_id</label>
-            <input type="text" class="form-control" id="inputName" placeholder="User ID" input={formData.user_id} onChange={handleChange} name="User ID"/>
+            <input type="text" class="form-control" id="inputName" placeholder="User ID" input={formData.user_id} onChange={handleChange} name="user_id"/>
           </div>
         </div>
         <div class="form-row row">

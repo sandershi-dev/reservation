@@ -1,7 +1,8 @@
 package com.example.reservation.repository;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,11 +16,11 @@ import com.example.reservation.domain.Reservation;
 @Repository
 public interface ReservationRepository  extends JpaRepository<Reservation, String>{
 
-    List<Reservation> findByDate(Date date);
+    List<Reservation> findByDate(LocalDate date);
 
     List<Reservation> findByUserId(String userId);
 
-    List<Reservation> findByTime(Time time);
+    List<Reservation> findByTime(LocalTime time);
     
     
 }
