@@ -20,6 +20,7 @@ function ReservationForm() {
   
     const handleSubmit = (e) => {
       e.preventDefault();
+      setFormData({ ...formData, [e.target.name]: e.target.value });
       console.log(formData)
       // Here, we'll add the code to post the form data using Axios
       axios.post("http://localhost:8080/reservation/create",{ 
