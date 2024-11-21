@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import './App.css';
+import ReservationTable from './routes/ReservationTable';
 
 function ReservationForm() {
     const [formData, setFormData] = useState({
@@ -76,6 +77,7 @@ function ReservationForm() {
         </div>
     </form>
     </div>
+  
   );
 }
 
